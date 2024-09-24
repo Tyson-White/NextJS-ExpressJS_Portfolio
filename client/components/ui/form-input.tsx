@@ -39,7 +39,7 @@ export const FormInput: FC<Props> = (props) => {
             + ` ${fieldState.error ? "border-red-700" : ""} `
             + className
         }>
-            <span className={`absolute px-[10px] duration-300 bg-[#0a0a0a] top-[-10px] left-[15px] text-sm ${focused ? 'opacity-0 top-[-30px]' : ''} `}>
+            <span className={`absolute px-[10px] duration-300 bg-[#fff] top-[-10px] left-[15px] text-sm ${focused ? 'opacity-0 top-[-30px]' : ''} `}>
                 {label}
             </span>
 

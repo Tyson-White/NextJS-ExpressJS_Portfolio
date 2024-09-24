@@ -9,9 +9,9 @@ interface Props {
 const Layout: FC<Props> = ({ children }) => {
   return (
     <>
-    <Container className="flex">
+    <Container className="flex ">
         <Sidebar />
-        <div className='p-20 flex-1'>
+        <div className='px-20 pt-[4.4rem] flex-1 overflow-scroll h-[100vh]'>
             {children}
         </div>
     </Container>

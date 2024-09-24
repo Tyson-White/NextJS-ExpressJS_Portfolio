@@ -1,11 +1,20 @@
+'use client'
+
 import PostComments from "@/components/shared/comments/post-comments"
+import { useGetMeQuery } from "@/redux/api"
 import Image from "next/image"
+import { useSelector } from "react-redux"
 
 type Props = {
     params: { url: string }
 }
 
 export default function Page({ params: { url } }: Props) {
+
+    const { data } = useGetMeQuery('')
+
+    console.log(data)
+
     return (
         <div>
             <h1 className="text-4xl">LegionProxy - Современный сайт на Next.js</h1>
@@ -25,6 +34,7 @@ export default function Page({ params: { url } }: Props) {
 
             <div className="w-[full] h-[1px] bg-white mt-[3.42rem]"></div>
 
+            
             <PostComments />
         </div>
     )

@@ -64,10 +64,10 @@ const page = () => {
                     invalid={errors.password}
                 />
                 <span className="mt-[0.5rem] cursor-pointer flex justify-end">Забыли пароль?</span>
-                <Button type="submit" className="mt-[1.25rem]" variant="fill" text={registerLoading ? <Loader /> : "Войти"}/>
+                <Button type="submit" className="mt-[1.25rem]" variant="outline" text={registerLoading ? <Loader /> : "Войти"}/>
             </form>
 
-            <Button handler={() => router.push('/signup')} className="mt-[0.85rem] w-[100%]" variant="outline" text="Регистрация"/>
+            <Button handler={() => router.push('/signup')} className="mt-[0.85rem] w-[100%]" variant="fill" text="Регистрация"/>
         </div>
     )
 }

@@ -7,10 +7,10 @@ import { FC } from 'react'
 
 
 const PostCard: FC<PostCardProps> = (props) => {
-    const { url, title, preview, tags, time, views } = props;
+    const { url, title, preview, tags, time, views, content } = props;
   return (
     <Link href={'/posts/' + url}>
-        <div className='relative w-full h-[30rem] overflow-hidden border border-white rounded-xl group'>
+        <div className='relative w-full h-[30rem] overflow-hidden border border-white rounded-xl group bg-[#fff] shadow-md'>
             <div className="relative z-0 duration-200 w-full h-[60%] group-hover:h-[30rem] group-hover:opacity-[0.4]">
                 <Image src={preview} fill objectFit='cover' alt='image'/>
             </div>
@@ -27,7 +27,7 @@ const PostCard: FC<PostCardProps> = (props) => {
                 </div>
             </div>
 
-            <MoveRight className='absolute duration-200 bottom-[2rem] right-[7rem] w-[2.25rem] h-[2.25rem] z-1 opacity-0 group-hover:right-[3rem] group-hover:opacity-[1]'/>
+            <MoveRight color={"#fff"} className='absolute duration-200 bottom-[2rem] right-[7rem] w-[2.25rem] h-[2.25rem] z-1 opacity-0 group-hover:right-[3rem] group-hover:opacity-[1]'/>
         </div>
     </Link>
   )
