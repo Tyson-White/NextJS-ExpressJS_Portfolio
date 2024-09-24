@@ -14,7 +14,6 @@ const PostCard: FC<PostCardProps> = (props) => {
             <div className="relative z-0 duration-200 w-full h-[60%] group-hover:h-[30rem] group-hover:opacity-[0.4]">
                 <Image src={preview} fill objectFit='cover' alt='image'/>
             </div>
-            <p className="absolute top-5 left-5">{content[0].text}</p>
             <div className="h-[30%] px-10 mt-[1.25rem] flex flex-col justify-between">
                 <h2 className='text-2xl'>{title}</h2>
                 <ul className='flex items-center gap-3'>

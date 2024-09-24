@@ -14,7 +14,7 @@ const navList = [
 
 const Sidebar: FC<Props> = (props) => {
   return (
-    <div className='h-full w-[18rem] border-r border-r-white/40'>
+    <div className='h-full pt-[4.4rem] w-[18rem] border-r border-r-white/40'>
         <ul className='px-10'>
             {navList.map((item, index) => (
                 <Link href={item.ref}>

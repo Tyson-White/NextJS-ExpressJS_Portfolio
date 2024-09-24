@@ -2,11 +2,11 @@
 
 import { Button } from "@/components/ui/button"
 import { FormInput } from "@/components/ui/form-input"
-import { Api } from "@/services/api-client"
+import { useRegisterMutation } from "@/redux/api"
 import { Eye, Loader } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form"
 
 export interface IForm {
     name?: string;
@@ -26,6 +26,7 @@ const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"
 const Page = () => {
 
     const router = useRouter()
+    const [onRegister, ] = useRegisterMutation()
     
     const { register, handleSubmit, watch, control, formState: {errors} } = useForm<IForm>({
         defaultValues: {
@@ -58,9 +59,8 @@ const Page = () => {
 
     const onSubmit: SubmitHandler<IForm> = async ({ rePassword, ...data }) => {
         try {
-            setRegisterLoading(true)
-            await Api.user.register(data)
-            .then(() => router.push('/'))
+            await onRegister(data)
+            router.push('/posts')
         } catch (error) {
             
         } finally {
@@ -127,13 +127,13 @@ const Page = () => {
                     
                 />
 
-                <Button type="submit" className="mt-[1.25rem]" variant="fill" text={registerLoading ? <Loader /> : "Зарегистрироваться"}/>
+                <Button type="submit" className="mt-[1.25rem]" variant="outline" text={registerLoading ? <Loader /> : "Зарегистрироваться"}/>
                 <Button 
                     handler={(e) => {
                         router.push('/login')
                         e.preventDefault();
                     }} 
-                    variant="outline" 
+                    variant="fill" 
                     text="Войти"
                 />
             </form>

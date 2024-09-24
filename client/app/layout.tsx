@@ -4,6 +4,8 @@ import { Balsamiq_Sans } from "next/font/google"
 import "./globals.css";
 import { Header } from "@/components/shared/header";
 import SmoothScroll from "@/utils/smooth-scroll"
+import { Providers } from "@/components/helpers/providers";
+import RequestDataContainer from "@/components/helpers/request-data-container";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -36,21 +38,21 @@ export default function RootLayout({
     
 
   return (
-    <html lang="en">
-        <SmoothScroll>
-            <body
-              className={`${balsamiqSans.className} antialiased`}
-            >
-
-                  <div className="fixed opacity-[0.008] z-1 top-0 left-0 w-full h-full bg-[url('/static/img/sharp.png')] bg-no-repeat"></div>
-
-                  <div className="relative overflow-hidden w-full z-2 h-[100vh]">
-                      <Header />
-                      {children}
-                  </div>
-
-            </body>
-        </SmoothScroll>
-    </html>
+    <Providers>
+        <html lang="en">
+            <SmoothScroll>
+                <body
+                  className={`${balsamiqSans.className} antialiased`}
+                >
+                        <RequestDataContainer />
+                      <div className="fixed opacity-[0.008] z-1 top-0 left-0 w-full h-full bg-[url('/static/img/sharp.png')] bg-no-repeat"></div>
+                      <div className="relative overflow-hidden w-full z-2 h-[100vh]">
+                          <Header />
+                          {children}
+                      </div>
+                </body>
+            </SmoothScroll>
+        </html>
+    </Providers>
   );
 }

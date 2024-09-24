@@ -11,11 +11,11 @@ interface Props {
     variant: Variant;
     disabled?: boolean;
     type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
-    buttonIcon: ReactElement;
+    buttonIcon?: ReactElement;
 }
 
 const buttonStyle = {
-    outline: "border border-white-50/50 hover:bg-white hover:text-black",
+    outline: "border border-white-50/50 hover:bg-gray-100/40 hover:text-black",
     fill:  "bg-white  text-black hover:bg-white/80"
 }
 

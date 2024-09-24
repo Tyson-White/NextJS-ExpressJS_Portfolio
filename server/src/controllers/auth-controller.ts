@@ -25,7 +25,7 @@ export async function login(req: Request<{}, {}, LoginForm>, res: Response) {
             return res.status(403).json({ message: "Неверный логин или пароль" })
         }
 
-        const token = jwt.sign({ id: user.id }, `${process.env.SECRET_KEY}`, { expiresIn: '1h' })
+        const token = jwt.sign({ id: user.id, role: user.role }, `${process.env.SECRET_KEY}`, { expiresIn: '1h' })
 
         res.cookie("token", token, {
             httpOnly: true
@@ -54,7 +54,7 @@ export async function register(req: Request<{}, {}, RegisterForm>, res: Response
             }
         })
 
-        const token = jwt.sign({ id: user.id }, `${process.env.SECRET_KEY}`, { expiresIn: '1h' })
+        const token = jwt.sign({ id: user.id, role: user.role }, `${process.env.SECRET_KEY}`, { expiresIn: '1h' })
 
         res.cookie("token", token, {
             httpOnly: true
@@ -67,4 +67,14 @@ export async function register(req: Request<{}, {}, RegisterForm>, res: Response
         return res.status(500).json({ message: "Ошибка при регистрации" })
     }
     
+}
+
+export async function getMe(req: Request<{}, {}, { decodedUserId: number }>, res: Response) {
+    const id = req.body.decodedUserId;
+
+    const users = await prisma.user.findMany({
+        where: { id },
+    })
+
+    return res.json(users[0])
 }
