@@ -11,6 +11,7 @@ interface Props {
     variant: Variant;
     disabled?: boolean;
     type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
+    buttonIcon: ReactElement;
 }
 
 const buttonStyle = {
@@ -18,15 +19,16 @@ const buttonStyle = {
     fill:  "bg-white  text-black hover:bg-white/80"
 }
 
-export const Button: FC<Props> = ({ text, variant, type = 'button', handler, disabled, className }) => {
+export const Button: FC<Props> = ({ text, variant, buttonIcon, type = 'button', handler, disabled, className }) => {
 
     return (
         <button 
             type={type}
             disabled={disabled} 
-            className={`h-10 flex justify-center items-center transition-colors duration-[0.4s] rounded-xl px-5 ${disabled ? 'bg-white/50 hover:bg-white/50' : ''} active:translate-y-[2px] ` + buttonStyle[variant] + ' ' + className} 
+            className={`h-10 flex gap-3 justify-center items-center transition-colors duration-[0.4s] rounded-xl px-5 ${disabled ? 'bg-white/50 hover:bg-white/50' : ''} active:translate-y-[2px] ` + buttonStyle[variant] + ' ' + className} 
             onClick={handler}>
-            {text}
+            <span>{text}</span>
+             {buttonIcon || ''}
         </button>
     )
 }

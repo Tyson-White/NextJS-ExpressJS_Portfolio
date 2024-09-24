@@ -8,17 +8,17 @@ interface Props {
 
 const navList = [
     { name: "Посты", ref: "/posts", icon: <Newspaper className='w-[1.5rem] h-[1.5rem]]'/>},
-    { name: "О сайте", ref: "/about", icon: <MessageCircleQuestionIcon className='w-[1.5rem] h-[1.5rem]]'/>},
+    { name: "О сайте", ref: "/about", icon: <MessageCircleQuestionIcon className='min-w-[1.5rem] min-h-[1.5rem]]'/>},
 
 ]
 
 const Sidebar: FC<Props> = (props) => {
   return (
     <div className='h-full w-[18rem] border-r border-r-white/40'>
-        <ul className='p-10'>
+        <ul className='px-10'>
             {navList.map((item, index) => (
                 <Link href={item.ref}>
-                    <li key={index} className='text-xl duration-150 py-[0.85rem] flex items-center border-b border-b-transparent justify-between gap-2 hover:border-b-white'>
+                    <li key={index} className='text-xl text-nowrap duration-150 p-[0.85rem] flex items-center border-b border-b-transparent justify-between rounded-xl gap-2 hover:px-[3.02rem] hover:shadow-md hover:bg-white'>
                         {item.name}
                         {item.icon}
                     </li>

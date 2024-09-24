@@ -25,6 +25,7 @@ export default function Page({ params: { url } }: Props) {
 
             <div className="w-[full] h-[1px] bg-white mt-[3.42rem]"></div>
 
+            
             <PostComments />
         </div>
     )

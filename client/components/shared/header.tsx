@@ -14,7 +14,7 @@ export const Header: FC<Props> = () => {
     const router = useRouter()
 
     return (
-        <header className="w-full h-20 flex items-center px-10 justify-between border-b border-b-white/30">
+        <header className="fixed w-full h-20 flex items-center px-10 justify-between border-b border-b-white/30">
             <Logo />
             <div className="flex items-center gap-3">
                 <Button handler={() => router.push('/signup')} text="Регистрация" variant="fill"/>
