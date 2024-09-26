@@ -103,7 +103,7 @@ const Page = () => {
                     label="Пароль" 
                     placeholder="Пароль" 
                     type={passwordsTypeState["password"]} 
-                    buttonIcon={<Eye color={`${passwordsTypeState.password === "text" ? "#4820e5" : "#fff"}`}/>}
+                    buttonIcon={<Eye color={`${passwordsTypeState.password === "text" ? "#4820e5" : "#000"}`}/>}
                     buttonHandler={() => togglePasswordType("password")}
                 />
                 <FormInput 
@@ -122,7 +122,7 @@ const Page = () => {
                     label="Повторите пароль" 
                     placeholder="Пароль еще раз" 
                     type={passwordsTypeState["rePassword"]} 
-                    buttonIcon={<Eye color={`${passwordsTypeState.rePassword === "text" ? "#4820e5" : "#fff"}`}/>}
+                    buttonIcon={<Eye color={`${passwordsTypeState.rePassword === "text" ? "#4820e5" : "#000"}`}/>}
                     buttonHandler={() => togglePasswordType("rePassword")}
                     
                 />

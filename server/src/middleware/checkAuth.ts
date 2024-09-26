@@ -1,4 +1,4 @@
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { NextFunction, Request, Response } from "express";
 
 export async function checkAuth(req: Request, res: Response, next: NextFunction) {
@@ -7,7 +7,9 @@ export async function checkAuth(req: Request, res: Response, next: NextFunction)
         const decoded = jwt.verify(token, `${process.env.SECRET_KEY}`)
         if (!decoded) throw new Error("Доступ запрещен") 
 
-        req.body.decodedUserId = (<{id: number}>decoded).id
+        req.decodedUserId = (<{id: number}>decoded).id
+        req.decodedUserRole = (<{role: number}>decoded).role
+
     } catch (err) {
         return res.status(403).json(err)
     }

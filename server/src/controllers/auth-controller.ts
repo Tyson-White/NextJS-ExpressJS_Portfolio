@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
-import { LoginForm, RegisterForm } from "../types/auth-types";
+import { LoginForm, RegisterForm } from "../@types/auth-types";
 import { prisma } from "../prisma/prisma-client";
 import { config } from "dotenv";
 
@@ -25,7 +25,7 @@ export async function login(req: Request<{}, {}, LoginForm>, res: Response) {
             return res.status(403).json({ message: "Неверный логин или пароль" })
         }
 
-        const token = jwt.sign({ id: user.id, role: user.role }, `${process.env.SECRET_KEY}`, { expiresIn: '1h' })
+        const token = jwt.sign({ id: user.id, role: user.role }, `${process.env.SECRET_KEY}`, { expiresIn: '30d' })
 
         res.cookie("token", token, {
             httpOnly: true
@@ -41,7 +41,6 @@ export async function login(req: Request<{}, {}, LoginForm>, res: Response) {
 export async function register(req: Request<{}, {}, RegisterForm>, res: Response) {
     const { email, password, name } = req.body;
 
-
     try {
         const salt = await bcrypt.genSalt(10)
         const passwordHash = await bcrypt.hash(password, salt)
@@ -54,7 +53,7 @@ export async function register(req: Request<{}, {}, RegisterForm>, res: Response
             }
         })
 
-        const token = jwt.sign({ id: user.id, role: user.role }, `${process.env.SECRET_KEY}`, { expiresIn: '1h' })
+        const token = jwt.sign({ id: user.id, role: user.role }, `${process.env.SECRET_KEY}`, { expiresIn: '30d' })
 
         res.cookie("token", token, {
             httpOnly: true
@@ -69,8 +68,8 @@ export async function register(req: Request<{}, {}, RegisterForm>, res: Response
     
 }
 
-export async function getMe(req: Request<{}, {}, { decodedUserId: number }>, res: Response) {
-    const id = req.body.decodedUserId;
+export async function getMe(req: Request, res: Response) {
+    const id = req.decodedUserId;
 
     const users = await prisma.user.findMany({
         where: { id },

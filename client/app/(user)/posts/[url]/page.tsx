@@ -1,7 +1,7 @@
 'use client'
 
 import PostComments from "@/components/shared/comments/post-comments"
-import { useGetMeQuery } from "@/redux/api"
+import { useGetMeQuery, useGetOnePostQuery } from "@/redux/api"
 import Image from "next/image"
 import { useSelector } from "react-redux"
 
@@ -11,8 +11,7 @@ type Props = {
 
 export default function Page({ params: { url } }: Props) {
 
-    const { data } = useGetMeQuery('')
-
+    const { data } = useGetOnePostQuery(url)
     console.log(data)
 
     return (

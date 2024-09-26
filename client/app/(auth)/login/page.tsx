@@ -7,12 +7,14 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { IForm } from "../signup/page"
-import { Api } from "@/services/api-client"
+import { useLoginMutation } from "@/redux/api"
 
 const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 const page = () => {
     const router = useRouter()
+
+    const [login] = useLoginMutation()
 
     const { register, handleSubmit, watch, control, formState: {errors} } = useForm({
         defaultValues: {
@@ -28,8 +30,10 @@ const page = () => {
 
     const onSubmit: SubmitHandler<IForm> = async ({ email, password }) => {
         try {
-            setRegisterLoading(true)
-            await Api.user.login({email, password})
+            
+            await login({ email, password })
+            router.push('/posts')
+            
         } catch (error) {
 
         } finally {
@@ -59,7 +63,7 @@ const page = () => {
                     className="mt-[1.25rem]"
                     placeholder="Пароль" 
                     type={passwordTypeState} 
-                    buttonIcon={<Eye color={`${passwordTypeState === "text" ? "#4820e5" : "#fff"}`}/>}
+                    buttonIcon={<Eye color={`${passwordTypeState === "text" ? "#4820e5" : "#000"}`}/>}
                     buttonHandler={() => setPasswordTypeState(prev => prev === "password" ? "text" : "password")}
                     invalid={errors.password}
                 />

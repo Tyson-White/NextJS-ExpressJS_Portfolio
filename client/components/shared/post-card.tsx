@@ -7,22 +7,26 @@ import { FC } from 'react'
 
 
 const PostCard: FC<PostCardProps> = (props) => {
-    const { url, title, preview, tags, time, views, content } = props;
+    const { url, title, tags, createdAt, imageUrl, views, content } = props;
+
+    const formatDate = (date: string) => {
+        return new Date(date).toLocaleString()
+    }
   return (
     <Link href={'/posts/' + url}>
         <div className='relative w-full h-[30rem] overflow-hidden border border-white rounded-xl group bg-[#fff] shadow-md'>
-            <div className="relative z-0 duration-200 w-full h-[60%] group-hover:h-[30rem] group-hover:opacity-[0.4]">
-                <Image src={preview} fill objectFit='cover' alt='image'/>
+            <div className="relative z-0 duration-200 w-full h-[60%] group-hover:h-[30rem] group-hover:opacity-[0.8]">
+                <Image src={'http://localhost:8080/uploads/' + imageUrl} fill objectFit='cover' alt='image'/>
             </div>
             <div className="h-[30%] px-10 mt-[1.25rem] flex flex-col justify-between">
                 <h2 className='text-2xl'>{title}</h2>
                 <ul className='flex items-center gap-3'>
-                    {tags.map((el) => (
-                        <li key={el.id} className='px-5 flex items-center h-[2.05rem] border shadow-md border-violet-800 text-black rounded-md bg-violet-600'>{el.text}</li>
+                    {tags.map((el, index) => (
+                        <li key={index} className='px-5 flex items-center h-[2.05rem] border shadow-md border-violet-800 text-black rounded-md bg-violet-600'>{el}</li>
                     ))}
                 </ul>
                 <div className="flex items-center justify-between">
-                    <span className='text-gray-400'>Опубликовано: {time.created}</span>
+                    <span className='text-gray-400'>Опубликовано: {formatDate(createdAt)}</span>
                     <span className='flex items-center gap-2'>{views}<Eye className='translate-y-[-1px] w-[1.25rem] h-[1.25rem]'/></span>
                 </div>
             </div>
