@@ -77,3 +77,33 @@ export async function getMe(req: Request, res: Response) {
 
     return res.json(users[0])
 }
+
+export async function logout(req: Request, res: Response) {
+    try {
+        const header = req.headers['cookie']
+        if (!header) return res.status(204).json("No content")
+
+        const token: string = header.split('=')[4]
+
+        const checkIfBlacklist = await prisma.tokenBlackList.findFirst({
+            where: {
+                token
+            }
+        })
+
+        if (checkIfBlacklist) return res.status(204)
+
+        const newBlackListToken = prisma.tokenBlackList.create({
+            data: {
+                token,
+                userId: req.decodedUserId
+            }
+        })
+
+        res.setHeader('Clear-Site-Data', '"cookies"');
+        res.status(200).json({ message: 'Произведен выход' })
+
+    } catch (error) {
+        res.status(500).json({ message: "Ошибка сервера" })
+    }
+}

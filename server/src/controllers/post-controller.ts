@@ -57,6 +57,13 @@ export async function getByUrl(req: Request<{url: string}, {}, {}>, res: Respons
             where: {
                 url
             },
+            include: {
+                comments: {
+                    include: {
+                        user: true
+                    }
+                }
+            }
         })
 
         res.json(post)
