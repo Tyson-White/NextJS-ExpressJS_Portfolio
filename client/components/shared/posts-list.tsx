@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import PostCard from '@/components/shared/post-card';
 import { PostCardProps } from '@/types/post';
+import PostPlaceholder from '@/components/shared/placeholders/post-placeholder';
 
 interface Props {
     className?: string;
@@ -9,12 +10,14 @@ interface Props {
 
 
 const PostsList: FC<Props> = ({ list }) => {
-    console.log(list)
   return (
-    <ul className='flex flex-col gap-10'>
-        {list?.map((el) => (
+    <ul className='flex flex-col gap-1'>
+        {list ? list.map((el) => (
             <PostCard key={el.id} {...el}/>
+        )) : [...new Array(3)].map((el, index) => (
+            <PostPlaceholder key={index}/> 
         ))}
+        
         
     </ul>
   )
