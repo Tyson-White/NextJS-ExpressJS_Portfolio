@@ -6,19 +6,20 @@ import {Button} from "@/components/ui/button"
 import { useCreateCommentMutation } from "@/redux/api";
 
 interface Props {
+    postId: number | undefined
     className?: string;
 }
 
-const SendCommentBlock: FC<Props> = ({ className }) => {
+const SendCommentBlock: FC<Props> = ({ postId, className }) => {
 
     const [send, {}] = useCreateCommentMutation()
     const [messageValue, setMessageValue] = useState('')
 
     const sendComment = () => {
-        if (messageValue.length > 0) {
+        if (messageValue.length > 0 && postId) {
             send({
                 message: messageValue,
-                postId: 1,
+                postId,
             })
         }
     }

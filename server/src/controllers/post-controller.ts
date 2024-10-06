@@ -3,23 +3,26 @@ import { Post, Prisma } from "@prisma/client";
 import { prisma } from "../prisma/prisma-client";
 
 export async function createPost(req: Request<{}, {}, Post>, res: Response) {
-    if (req.decodedUserRole === 2) {
+    if (req.decodedUserRole > 2) {
 
-        const { title, tags, content, imageUrl, userId, url } = req.body;
+        const { title, tags, content, url, preview} = req.body;
+        const id = req.decodedUserId
+        
 
         const json = content as Prisma.JsonArray
-
+        
         try {
             const post = await prisma.post.create({
                 data: {
                     title, 
                     content: json,
-                    imageUrl,
-                    userId: userId,
+                    preview,
+                    userId: id,
                     tags,
                     url
                 }
             })
+
 
             res.json(post)
         } catch (error) {

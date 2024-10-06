@@ -1,10 +1,5 @@
+import { IParagrapth, ParagraphContent } from "./create-post-types";
 import { IUser } from "./user";
-
-type PostContent = {
-    text?: string;
-    url?: string;
-    type: 1 | 2;
-}
 
 export interface ICreatePost {
     message: string;
@@ -26,8 +21,8 @@ export interface PostCardProps {
     id: number;
     className?: string;
     title: string;
-    content: PostContent[];
-    imageUrl: string;
+    content: IParagrapth[];
+    preview: string;
     url: string;
     tags: string[];
     views: number;

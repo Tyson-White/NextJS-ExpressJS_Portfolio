@@ -17,13 +17,13 @@ export default function Page({ params: { url } }: Props) {
             <h1 className="text-4xl">{postData?.title}</h1>
             <div className="mt-[3.25rem]">
                 {postData?.content.map((content) =>  (
-                    content.type === 1 ? (
+                    content.type === "text" ? (
                         <p className="text-lg">
-                            {content.text}
+                            {content.content.text}
                         </p>
                     ) : (
                         <div className="relative w-[100%] mt-[1.25rem]">
-                            <Image src={`${content.url}`} width={1000} height={750} alt="legion2"/>
+                            <Image src={`http://localhost:8080/uploads/${content.content.file}`} width={1000} height={750} alt="legion2"/>
                         </div>
                     )
                 ))}
@@ -32,7 +32,7 @@ export default function Page({ params: { url } }: Props) {
             <div className="w-[full] h-[1px] bg-white mt-[3.42rem]"></div>
 
             
-            <PostComments comments={postData?.comments}/>
+            <PostComments postId={postData?.id} comments={postData?.comments}/>
         </div>
     )
 }

@@ -46,3 +46,22 @@ export async function createComment(req: Request<{}, {}, Comment>, res: Response
         res.status(500).json(error)
     }
 }
+
+export async function deleteComment(req: Request, res: Response) {
+    const { id } = req.params
+
+    try {
+        const deletedComment = await prisma.comment.delete({
+            where: {
+                id: Number(id)
+            }
+        })
+
+        res.json({
+            message: "Комментарий удалён.",
+            comment: deletedComment
+        })
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}

@@ -27,8 +27,8 @@ model Post {
 
     title String 
     tags String[]
-    imageUrl String
     content Json
+    preview String?
     views Int @default(0) 
     url String @unique
 

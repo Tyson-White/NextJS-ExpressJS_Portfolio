@@ -7,16 +7,19 @@ import router from "./router/router";
 
 config()
 
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true,
+    methods: ["GET","HEAD","PUT","PATCH","POST","DELETE"],
+    preflightContinue: true
+}
 const app = express();
+
+app.use(cors(corsOptions))
 
 app.use('/uploads', express.static(path.join(__dirname, "uploads")));
 
 app.use(express.json())
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true
-}))
-
 
 app.use('/', router)
 

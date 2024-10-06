@@ -7,7 +7,8 @@ import { FC } from 'react'
 
 
 const PostCard: FC<PostCardProps> = (props) => {
-    const { url, title, tags, createdAt, imageUrl, views, content } = props;
+    const { url, title, tags, createdAt, preview, views, content } = props;
+    console.log(preview)
 
     const formatDate = (date: string) => {
         return new Date(date).toLocaleString()
@@ -16,12 +17,12 @@ const PostCard: FC<PostCardProps> = (props) => {
     <Link href={'/posts/' + url}>
         <div className='relative w-full h-[30rem] overflow-hidden border border-white rounded-xl group bg-[#fff] shadow-md'>
             <div className="relative z-0 duration-200 w-full h-[60%] group-hover:h-[30rem] group-hover:opacity-[0.8]">
-                <Image src={'http://localhost:8080/uploads/' + imageUrl} fill objectFit='cover' alt='image'/>
+                <Image src={'http://localhost:8080/uploads/' + preview} fill objectFit='cover' alt='image'/>
             </div>
             <div className="h-[30%] px-10 mt-[1.25rem] flex flex-col justify-between">
                 <h2 className='text-2xl'>{title}</h2>
                 <ul className='flex items-center gap-3'>
-                    {tags.map((el, index) => (
+                    {tags.length > 0 && tags.map((el, index) => (
                         <li key={index} className='px-5 flex items-center h-[2.05rem] border shadow-md border-violet-800 text-black rounded-md bg-violet-600'>{el}</li>
                     ))}
                 </ul>
